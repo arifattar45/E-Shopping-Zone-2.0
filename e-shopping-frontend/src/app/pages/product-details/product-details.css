@@ -1,0 +1,31 @@
+.details {
+  display: flex;
+  gap: 40px;
+  padding: 40px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.left img {
+  width: 400px;
+  border-radius: 10px;
+}
+
+.right {
+  max-width: 500px;
+}
+
+.brand {
+  color: #64748b;
+}
+
+.price {
+  color: #1d4ed8;
+}
+
+.cart-btn {
+  margin-top: 20px;
+  padding: 10px;
+  background: #2563eb;
+  color: white;
+  border: none;
+}

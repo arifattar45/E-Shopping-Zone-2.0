@@ -1,0 +1,149 @@
+.order-container {
+  max-width: 850px;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.title {
+  margin-bottom: 15px;
+}
+
+/* 🔥 COMPACT CARD */
+.order-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.header h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+/* STATUS BADGE */
+.status {
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 11px;
+}
+
+.status.PLACED {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+/* INFO */
+.info p {
+  margin: 2px 0;
+  font-size: 13px;
+}
+
+/* 🔥 ITEMS SECTION */
+.items {
+  margin-top: 10px;
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+}
+
+/* 🔥 COMPACT ITEM ROW */
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+/* SMALL IMAGE */
+.item-img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+/* TEXT */
+.item-details h4 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.item-details p {
+  margin: 2px 0;
+  font-size: 12px;
+  color: #555;
+}
+
+/* EMPTY */
+.empty {
+  text-align: center;
+  margin-top: 30px;
+  color: gray;
+}
+
+/* ACTION BUTTON */
+.actions {
+  margin-top: 10px;
+}
+
+.cancel-btn {
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.cancel-btn:hover {
+  background: #d9363e;
+}
+
+/* 🔥 TRACK BAR */
+.track {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  font-size: 11px;
+  color: #aaa;
+  position: relative;
+}
+
+.step::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -50%;
+  width: 100%;
+  height: 2px;
+  background: #ddd;
+}
+
+.step:last-child::after {
+  display: none;
+}
+
+.step.active {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.step.active::after {
+  background: #2ecc71;
+}

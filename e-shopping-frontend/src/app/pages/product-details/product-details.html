@@ -1,0 +1,21 @@
+<div *ngIf="product" class="details">
+
+  <img [src]="product.imageUrl" />
+
+  <div class="info">
+    <h2>{{product.name}}</h2>
+    <p>{{product.description}}</p>
+
+    <h3>₹ {{product.price}}</h3>
+
+    <!-- QUANTITY -->
+    <div class="qty">
+      <button (click)="quantity = quantity > 1 ? quantity - 1 : 1">-</button>
+      <span>{{quantity}}</span>
+      <button (click)="quantity = quantity + 1">+</button>
+    </div>
+
+    <button (click)="addToCart()">Add to Cart</button>
+  </div>
+
+</div>

@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+
+<div class="container">
+
+  <h2>🛠 Admin Orders</h2>
+
+  <div *ngFor="let order of orders" class="card">
+
+    <h3>Order #{{order.id}}</h3>
+    <p>Total: ₹ {{order.totalAmount}}</p>
+    <p>Status: {{order.status}}</p>
+
+    <div class="actions">
+      <button (click)="updateStatus(order.id, 'SHIPPED')">Ship</button>
+      <button (click)="updateStatus(order.id, 'DELIVERED')">Deliver</button>
+      <button (click)="updateStatus(order.id, 'REFUNDED')">Refund</button>
+    </div>
+
+  </div>
+
+</div>

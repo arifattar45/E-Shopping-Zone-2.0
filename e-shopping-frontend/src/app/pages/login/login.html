@@ -1,0 +1,42 @@
+<div class="login-wrapper">
+
+  <div class="logo">E-Shop<span>.in</span></div>
+
+  <div class="login-box">
+
+    <h2>{{ isRegisterMode ? 'Create Account' : 'Sign In' }}</h2>
+
+    <!-- NAME (REGISTER ONLY) -->
+    <input *ngIf="isRegisterMode"
+           placeholder="Full Name"
+           [(ngModel)]="name" />
+
+    <input
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="email" />
+
+    <input
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="password" />
+
+    <!-- ERROR -->
+    <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+<p class="success" *ngIf="successMsg">{{ successMsg }}</p>
+
+    <button type="button" (click)="submit()" class="primary-btn">
+      {{ isRegisterMode ? 'Register' : 'Login' }}
+    </button>
+
+    <!-- TOGGLE -->
+    <p class="switch">
+      {{ isRegisterMode ? 'Already have an account?' : 'New user?' }}
+      <span (click)="toggleMode()">
+        {{ isRegisterMode ? 'Login' : 'Register' }}
+      </span>
+    </p>
+
+  </div>
+
+</div>

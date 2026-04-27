@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+
+<div class="order-container">
+
+  <h2>Checkout</h2>
+
+  <div class="form">
+
+    <!-- Address -->
+    <label>Delivery Address</label>
+    <textarea [(ngModel)]="address" placeholder="Enter address"></textarea>
+
+    <!-- Payment -->
+    <label>Payment Method</label>
+    <select [(ngModel)]="paymentMethod">
+      <option value="COD">Cash on Delivery</option>
+      <option value="UPI">UPI</option>
+    </select>
+
+    <!-- Button -->
+    <button (click)="placeOrder()" [disabled]="isLoading">
+      {{ isLoading ? 'Placing Order...' : 'Place Order' }}
+    </button>
+
+    <!-- Messages -->
+    <div *ngIf="successMsg" class="success-box">
+  {{ successMsg }}
+</div>
+
+<div *ngIf="errorMsg" class="error-box">
+  {{ errorMsg }}
+</div>
+
+  </div>
+
+</div>

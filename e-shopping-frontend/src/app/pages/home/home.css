@@ -1,0 +1,95 @@
+body {
+  margin: 0;
+  background: #f1f5f9;
+}
+
+
+.category-card {
+  flex: 1;
+  background: white;
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* 🔥 PRODUCT GRID */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* 🔥 center everything */
+  gap: 20px;
+  padding: 20px;
+}
+
+/* 🔥 CONTROLS BAR */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 15px;
+  background: #ffffff;
+  border-bottom: 1px solid #ddd;
+  flex-wrap: wrap;
+}
+
+/* inputs */
+.controls input,
+.controls select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+  transition: 0.2s;
+  min-width: 150px;
+}
+
+/* focus effect */
+.controls input:focus,
+.controls select:focus {
+  border-color: #2874f0;
+  box-shadow: 0 0 5px rgba(40,116,240,0.3);
+}
+
+/* spacing fix */
+body {
+  background: #f3f4f6;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.categories button {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+
+  background: #f1f5f9;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.categories button:hover {
+  background: #e2e8f0;
+}
+
+.categories .active {
+  background: #131921;
+  color: white;
+}
+
+.products-container {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+
+  padding: 20px 40px;
+  justify-items: center; /* 🔥 CENTER EACH CARD */
+}

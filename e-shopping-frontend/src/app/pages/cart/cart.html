@@ -1,0 +1,54 @@
+<app-navbar></app-navbar>
+
+<div class="cart-container">
+
+    <h2>Your Cart</h2>
+
+    <!-- 🔥 LOADING STATE -->
+    <div *ngIf="isLoading">Loading cart...</div>
+
+    <div *ngIf="!isLoading && cartItems.length === 0" class="empty">
+        Cart is empty 🛒
+    </div>
+
+    <!-- 🔁 LOOP -->
+    <div *ngIf="!isLoading && cartItems.length > 0">
+        <div *ngFor="let item of cartItems; let i = index" class="cart-item">
+
+            <img [src]="getLocalImage(item.productName)" />
+
+            <div class="details">
+                <h3>{{item.productName}}</h3>
+                <p>{{item.description}}</p>
+                <div class="price">₹ {{item.price}}</div>
+            </div>
+
+            <div class="actions">
+                <div class="qty-box">
+                    <button (click)="decrease(item, i)">-</button>
+                    <span>{{item.quantity}}</span>
+                    <button (click)="increase(item, i)">+</button>
+                </div>
+
+                <button (click)="removeItem(item, i)">Remove</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ✅ TOTAL -->
+    <div class="checkout-box" *ngIf="!isLoading && cartItems.length > 0">
+        <h3>Total: ₹ {{getTotal()}}</h3>
+
+        <button class="checkout-btn" (click)="checkout()">
+            Proceed to Checkout
+        </button>
+
+        <div class="login-card" *ngIf="showLoginCard">
+            <h3>Login Required 🔐</h3>
+            <p>Please login to continue checkout</p>
+            <button class="login-btn" (click)="goToLogin()">Go to Login</button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="controls">
+
+  <input 
+    type="text"
+    placeholder="🔍 Search products..."
+    [(ngModel)]="searchTerm"
+    (input)="loadProducts()"
+  />
+
+  <input 
+    type="number"
+    placeholder="Min ₹"
+    [(ngModel)]="minPrice"
+    (input)="loadProducts()"
+  />
+
+  <input 
+    type="number"
+    placeholder="Max ₹"
+    [(ngModel)]="maxPrice"
+    (input)="loadProducts()"
+  />
+
+  <select [(ngModel)]="sortOrder" (change)="loadProducts()">
+    <option value="">Sort</option>
+    <option value="price,asc">💰 Low → High</option>
+    <option value="price,desc">💰 High → Low</option>
+  </select>
+
+</div>
+<div class="categories">
+<button (click)="filterByCategory('electronics')">Electronics</button>
+<button (click)="filterByCategory('accessories')">Accessories</button>
+<button (click)="filterByCategory('home')">Home</button>
+<button (click)="filterByCategory('fashion')">Fashion</button>
+<button (click)="filterByCategory('')">All</button>
+</div>
+
+<div class="product-grid">
+  <app-product-card 
+    *ngFor="let product of products"
+    [product]="product">
+  </app-product-card>
+</div>
