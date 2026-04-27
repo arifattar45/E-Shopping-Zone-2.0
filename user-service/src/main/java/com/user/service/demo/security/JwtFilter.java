@@ -31,11 +31,20 @@ public class JwtFilter extends OncePerRequestFilter {
         this.userRepository = userRepository;
     }
 
+    
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain)
             throws ServletException, IOException {
+    	
+    	String path = request.getServletPath();
+
+    	// 🔥 SKIP AUTH ENDPOINTS
+    	if (path.startsWith("/auth")) {
+    	    filterChain.doFilter(request, response);
+    	    return;
+    	}
 
         String authHeader = request.getHeader("Authorization");
 

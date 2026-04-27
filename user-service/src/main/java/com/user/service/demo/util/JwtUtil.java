@@ -16,18 +16,18 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtUtil {
 
-    private final String SECRET = "add-secret-key"; // min 32 chars for HS256
+    private final String SECRET = "mysecretkeymysecretkeymysecretkey12"; // min 32 chars for HS256
 
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
     }
 
-    // ✅ Generate Token (1 hour expiry)
+    //Generate Token (1 hour expiry)
     public String generateToken(User user) {
         return Jwts.builder()
-                .subject(user.getEmail())   // already correct
-                .claim("userId", user.getId())   // ✅ ADD THIS
-                .claim("role", user.getRole())   // ✅ ADD THIS
+                .subject(user.getEmail())   
+                .claim("userId", user.getId())   
+                .claim("role", user.getRole())   
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(getSigningKey())
@@ -58,12 +58,12 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    // ✅ Extract All Claims
+    //Extract All Claims
     private Claims extractClaims(String token) {
         return Jwts.parser()
-                .verifyWith(getSigningKey())      //new API (was setSigningKey)
-                .build()                          //required in new API
-                .parseSignedClaims(token)         //new API (was parseClaimsJws)
-                .getPayload();                    //new API (was getBody)
+                .verifyWith(getSigningKey())      
+                .build()                          
+                .parseSignedClaims(token)         
+                .getPayload();                    
     }
 }

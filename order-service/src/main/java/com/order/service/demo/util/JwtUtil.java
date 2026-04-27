@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 @Component
 public class JwtUtil {
 
-    private final String SECRET = "add-secret-key";
+    private final String SECRET = "mysecretkeymysecretkeymysecretkey12";
 
     private SecretKey getKey() {
         return Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));

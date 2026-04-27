@@ -46,7 +46,15 @@ public class OrderController {
     public ResponseEntity<?> getAllOrders() {
         return ResponseEntity.ok(service.getAllOrders());
     }
-
+    
+    @PutMapping("/{id}/cancel")
+    @Operation(summary = "Cancel Order")
+    public ResponseEntity<?> cancelOrder(
+            @RequestHeader("Authorization") String header,
+            @PathVariable Long id
+    ) {
+        return ResponseEntity.ok(service.cancelOrder(header.substring(7), id));
+    }
     //ADMIN → Update order status
     @PutMapping("/{id}/status")
     @Operation(summary = "Update order status (ADMIN)")

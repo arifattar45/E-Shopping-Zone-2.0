@@ -77,8 +77,17 @@ public class OrderService {
     }
 
     public List<Orders> getMyOrders(String token) {
+
         Long userId = jwtUtil.extractUserId(token);
-        return orderRepo.findByUserId(userId);
+
+        List<Orders> orders = orderRepo.findByUserId(userId);
+
+        for (Orders order : orders) {
+            List<OrderItem> items = itemRepo.findByOrderId(order.getId());
+            order.setItems(items); // 🔥 IMPORTANT
+        }
+
+        return orders;
     }
     
     public List<Orders> getAllOrders() {
@@ -102,6 +111,28 @@ public class OrderService {
         if (status.equalsIgnoreCase("REFUNDED")) {
             order.setPaymentStatus("REFUNDED");
         }
+
+        return orderRepo.save(order);
+    }
+
+    public Orders cancelOrder(String token, Long orderId) {
+
+        Long userId = jwtUtil.extractUserId(token);
+
+        Orders order = orderRepo.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        // ✅ check ownership
+        if (!order.getUserId().equals(userId)) {
+            throw new RuntimeException("Unauthorized");
+        }
+
+        // ✅ prevent cancel after delivery
+        if (order.getStatus().equals("DELIVERED")) {
+            throw new RuntimeException("Cannot cancel delivered order");
+        }
+
+        order.setStatus("CANCELLED");
 
         return orderRepo.save(order);
     }

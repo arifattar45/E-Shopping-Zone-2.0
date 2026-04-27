@@ -1,11 +1,13 @@
 package com.order.service.demo.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Orders {
@@ -23,6 +25,17 @@ public class Orders {
     private String paymentMethod;   // COD, UPI
 
     private LocalDateTime createdAt;
+    
+    @Transient
+    private List<OrderItem> items;
+
+    public List<OrderItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+    }
 
 	public Long getId() {
 		return id;

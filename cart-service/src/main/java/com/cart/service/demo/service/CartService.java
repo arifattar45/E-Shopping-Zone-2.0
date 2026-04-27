@@ -29,20 +29,26 @@ public class CartService {
 
         Long userId = jwtUtil.extractUserId(token);
 
-        Product product;
+        List<CartItem> existing =
+            repo.findByUserIdAndProductId(userId, req.getProductId());
 
-        try {
-            product = productClient.getProductById(req.getProductId());
-        } catch (Exception e) {
-            throw new RuntimeException("Product not found with id: " + req.getProductId());
+        CartItem item;
+
+        if (!existing.isEmpty()) {
+            // ✅ update quantity
+            item = existing.get(0);
+            item.setQuantity(item.getQuantity() + req.getQuantity());
+        } else {
+            // ✅ create new
+            Product product = productClient.getProductById(req.getProductId());
+
+            item = new CartItem();
+            item.setUserId(userId);
+            item.setProductId(req.getProductId());
+            item.setQuantity(req.getQuantity());
+            item.setPrice(product.getPrice());
+            item.setProductName(product.getName());
         }
-
-        CartItem item = new CartItem();
-        item.setUserId(userId);
-        item.setProductId(req.getProductId());
-        item.setQuantity(req.getQuantity());
-        item.setPrice(product.getPrice());
-        item.setProductName(product.getName());
 
         return repo.save(item);
     }

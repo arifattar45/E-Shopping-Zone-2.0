@@ -26,10 +26,11 @@ public class SecurityConfig {
                 //USER APIs
                 .requestMatchers(HttpMethod.POST, "/orders/checkout").hasRole("USER")
                 .requestMatchers(HttpMethod.GET, "/orders").hasRole("USER")
+                .requestMatchers(HttpMethod.PUT, "/orders/*/cancel").hasRole("USER") 
 
                 //ADMIN APIs
                 .requestMatchers(HttpMethod.GET, "/orders/all").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/orders/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/orders/*/status").hasRole("ADMIN")
 
                 //Swagger
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()

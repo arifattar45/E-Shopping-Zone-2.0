@@ -12,7 +12,7 @@ import io.jsonwebtoken.security.Keys;
 public class JwtUtil {
 
 	private final Key key = Keys.hmacShaKeyFor(
-		    "add-secret-key".getBytes()
+		    "mysecretkeymysecretkeymysecretkey12".getBytes()
 		);
 
     public Claims extractClaims(String token) {
