@@ -1,0 +1,84 @@
+<div class="orders-page">
+
+  <div class="top-bar">
+    <h1>Manage Orders</h1>
+  </div>
+
+  <div class="table-wrapper">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>User</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Update Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let order of orders">
+
+          <td>#{{order.id}}</td>
+
+          <td>
+  {{order.userEmail || 'No Email'}}
+</td>
+
+          <td>
+            ₹ {{order.totalAmount}}
+          </td>
+
+          <td>
+            <span class="status" [ngClass]="order.status">
+              {{order.status}}
+            </span>
+          </td>
+
+          <td>
+
+            <select
+              #statusSelect
+              (change)="updateStatus(order.id, statusSelect.value)">
+
+              <option value="">Change Status</option>
+
+              <option value="PLACED">
+                PLACED
+              </option>
+
+              <option value="CONFIRMED">CONFIRMED</option>
+
+              <option value="SHIPPED">
+                SHIPPED
+              </option>
+
+              <option value="OUT_FOR_DELIVERY">
+                OUT FOR DELIVERY
+              </option>
+
+              <option value="DELIVERED">
+                DELIVERED
+              </option>
+
+              <option value="CANCELLED">
+                CANCELLED
+              </option>
+
+
+            </select>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

@@ -1,0 +1,174 @@
+<app-navbar></app-navbar>
+
+<div class="order-container">
+
+  <h2 class="title">📦 My Orders</h2>
+
+  <!-- Loading -->
+
+  <div *ngIf="isLoading">
+    Loading orders...
+  </div>
+
+  <!-- Empty -->
+
+  <div *ngIf="!isLoading && orders.length===0" class="empty">
+
+    No orders yet 😔
+
+  </div>
+
+  <!-- Orders -->
+
+  <div *ngIf="!isLoading">
+
+    <div *ngFor="let order of orders" class="order-card">
+
+      <!-- Header -->
+
+      <div class="order-header">
+
+        <div>
+
+          <h2>📦 Order #{{order.id}}</h2>
+
+          <small>
+
+            Ordered on {{order.createdAt | date:'mediumDate'}}
+
+          </small>
+
+        </div>
+
+        <span class="status" [ngClass]="order.status">
+
+          {{order.status}}
+
+        </span>
+
+      </div>
+
+      <!-- Delivery -->
+
+      <div class="address-section">
+
+        <h3>🚚 Delivery Address</h3>
+
+        <p><strong>{{order.fullName}}</strong></p>
+
+        <p>{{order.house}}</p>
+
+        <p>{{order.street}}</p>
+
+        <p>{{order.city}}, {{order.state}} - {{order.pincode}}</p>
+
+        <p>📞 {{order.phone}}</p>
+
+      </div>
+
+      <!-- Payment -->
+
+      <div class="payment-section">
+
+        <div>
+
+          <strong>Payment</strong>
+
+          <p>{{order.paymentMethod}}</p>
+
+        </div>
+
+        <div>
+
+          <strong>Status</strong>
+
+          <p>{{order.paymentStatus}}</p>
+
+        </div>
+
+        <div>
+
+          <strong>Total</strong>
+
+          <h2>₹{{order.totalAmount}}</h2>
+
+        </div>
+
+      </div>
+
+      <!-- Products -->
+
+      <div class="items">
+
+        <div *ngFor="let item of order.items" class="item">
+
+          <img [src]="item.imageUrl" class="product-img">
+
+          <div class="item-details">
+
+            <h3>{{item.productName}}</h3>
+
+            <p>Quantity : {{item.quantity}}</p>
+
+            <h4>₹{{item.price}}</h4>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Tracking -->
+
+      <div class="track">
+
+        <div class="step" [class.active]="getTrackingStatus(order.status)>=1">
+
+          ✔ Ordered
+
+        </div>
+
+        <div class="step" [class.active]="getTrackingStatus(order.status)>=2">
+
+          📦 Confirmed
+
+        </div>
+
+        <div class="step" [class.active]="getTrackingStatus(order.status)>=3">
+
+          🚚 Shipped
+
+        </div>
+
+        <div class="step" [class.active]="getTrackingStatus(order.status)>=4">
+
+          🚛 Out for Delivery
+
+        </div>
+
+        <div class="step" [class.active]="getTrackingStatus(order.status)>=5">
+
+          🏠 Delivered
+
+        </div>
+
+      </div>
+
+      <!-- Action -->
+
+      <div class="actions">
+
+        <button *ngIf="order.status!='DELIVERED' && order.status!='CANCELLED'" class="cancel-btn"
+          (click)="cancelOrder(order.id)">
+
+          Cancel Order
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

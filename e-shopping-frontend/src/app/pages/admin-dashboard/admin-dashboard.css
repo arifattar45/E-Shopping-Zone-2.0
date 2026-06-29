@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f3f4f6;
+}
+
+/* CONTENT */
+.dashboard-content {
+  flex: 1;
+  padding: 40px;
+}
+
+/* TITLE */
+.dashboard-title {
+  font-size: 58px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 40px;
+}
+
+/* GRID */
+.stats-grid {
+  display: grid;
+
+  grid-template-columns:
+  repeat(4, 260px);
+
+  gap: 22px;
+
+  align-items: start;
+}
+/* CARD */
+.stat-card {
+  background: white;
+
+  border-radius: 18px;
+
+  padding: 24px;
+
+  min-height: 170px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  border: 1px solid #e5e7eb;
+
+  transition: 0.3s ease;
+
+  box-shadow:
+  0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* HOVER */
+.stat-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+  0 12px 24px rgba(0,0,0,0.12);
+}
+
+/* AMAZON STYLE TOP BAR */
+.stat-card::before {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 5px;
+
+  background: #131921;
+}
+
+/* TEXT */
+.stat-card h3 {
+  color: #64748b;
+
+  font-size: 22px;
+
+  margin-bottom: 30px;
+
+  font-weight: 600;
+}
+
+/* VALUE */
+.stat-card h1 {
+  font-size: 42px;
+
+  color: #0f172a;
+
+  font-weight: 800;
+
+  line-height: 1.1;
+}
+
+/* ICON */
+.icon {
+  position: absolute;
+
+  right: 18px;
+  bottom: 12px;
+
+  font-size: 52px;
+
+  opacity: 0.06;
+}
+
+/* RESPONSIVE */
+@media(max-width: 1400px) {
+
+  .stats-grid {
+    grid-template-columns:
+    repeat(2, 1fr);
+  }
+}
+
+@media(max-width: 800px) {
+
+  .dashboard-content {
+    padding: 20px;
+  }
+
+  .dashboard-title {
+    font-size: 34px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

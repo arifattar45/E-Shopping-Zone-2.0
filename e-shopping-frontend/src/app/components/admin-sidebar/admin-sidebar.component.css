@@ -1,0 +1,41 @@
+.sidebar{
+  width:260px;
+  background:#131921;
+  color:white;
+
+  position:fixed;
+  top:0;
+  left:0;
+  bottom:0;
+
+  padding:30px 20px;
+
+  overflow-y:auto;
+}
+.sidebar h1{
+  font-size:28px;
+  margin-bottom:50px;
+  line-height:1.2;
+}
+
+.sidebar a{
+  display:block;
+  color:white;
+  text-decoration:none;
+
+  padding:14px 16px;
+  border-radius:10px;
+
+  margin-bottom:15px;
+
+  font-size:18px;
+  transition:.2s;
+}
+
+.sidebar a:hover{
+  background:#374151;
+}
+
+.sidebar a.active{
+  background:#374151;
+}

@@ -1,0 +1,24 @@
+<div class="card" (click)="viewDetails()">
+
+  <!-- IMAGE -->
+  <div class="img-container">
+    <img [src]="product.imageUrl" alt="product" />
+  </div>
+
+  <!-- INFO -->
+  <div class="info">
+    <h3>{{product.name}}</h3>
+    <p class="desc">{{product.description}}</p>
+
+    <!-- ONLY REAL PRICE -->
+    <div class="price">₹ {{product.price}}</div>
+
+    <div class="rating">⭐ {{product.rating}}</div>
+  </div>
+
+  <!-- ACTION -->
+  <button class="cart-btn" (click)="addToCart($event)">
+    Add to Cart
+  </button>
+
+</div>

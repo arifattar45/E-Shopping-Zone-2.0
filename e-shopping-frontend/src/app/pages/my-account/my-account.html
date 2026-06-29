@@ -1,0 +1,325 @@
+<app-navbar></app-navbar>
+
+<div class="account-container">
+
+    <!-- Header -->
+    <div class="header">
+        <div>
+            <h1>Welcome back, {{ user?.name || 'User' }} 👋</h1>
+            <p>Manage your profile, wallet and recent activities.</p>
+        </div>
+    </div>
+
+    <!-- Profile + Wallet -->
+    <div class="top-section">
+
+        <!-- Profile Card -->
+        <div class="card profile-card">
+
+            <div class="profile-header">
+
+                <div class="avatar">
+                    {{ user?.name?.charAt(0) }}
+                </div>
+
+                <div>
+                    <h2>{{ user?.name }}</h2>
+                    <p>{{ user?.email }}</p>
+                </div>
+
+            </div>
+
+            <div class="info">
+                <label>Role</label>
+                <span>{{ user?.role }}</span>
+            </div>
+
+        </div>
+
+        <!-- Wallet Card -->
+        <div class="card wallet-card">
+
+            <h3>💳 Wallet</h3>
+
+            <p class="wallet-label">
+                Available Balance
+            </p>
+
+            <div class="balance">
+                ₹{{ wallet?.balance || 0 }}
+            </div>
+
+            <div class="wallet-status">
+                🟢 Wallet Active
+            </div>
+
+            <button class="add-money-btn" (click)="addMoney()">
+                + Add Money
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+
+        <div class="stat-card">
+            <h4>Wallet</h4>
+            <h2>₹{{ wallet?.balance || 0 }}</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Transactions</h4>
+            <h2>{{ transactions.length }}</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Orders</h4>
+            <h2>0</h2>
+        </div>
+
+    </div>
+
+    <!-- Transactions -->
+    <div class="card">
+
+        <h3>📜 Recent Transactions</h3>
+
+        <div *ngIf="transactions.length === 0" class="empty-state">
+
+            No transactions yet.
+
+        </div>
+
+        <div class="transaction-card" *ngFor="let t of transactions | slice:0:3">
+
+            <div class="transaction-left">
+
+                <div class="transaction-icon" [ngClass]="{
+            'credit-bg': t.transactionType === 'CREDIT',
+            'debit-bg': t.transactionType === 'DEBIT'
+          }">
+
+                    {{ t.transactionType === 'CREDIT' ? '⬇' : '⬆' }}
+
+                </div>
+
+                <div>
+
+                    <h4>{{ t.description }}</h4>
+
+                    <small>
+                        {{ t.createdAt | date:'medium' }}
+                    </small>
+
+                </div>
+
+            </div>
+
+            <div class="transaction-right">
+
+                <h3 [ngClass]="{
+            'credit-text': t.transactionType === 'CREDIT',
+            'debit-text': t.transactionType === 'DEBIT'
+          }">
+
+                    {{ t.transactionType === 'CREDIT' ? '+' : '-' }}₹{{ t.amount }}
+
+                </h3>
+
+                <span class="badge" [ngClass]="{
+            'credit': t.transactionType === 'CREDIT',
+            'debit': t.transactionType === 'DEBIT'
+          }">
+
+                    {{ t.transactionType }}
+
+                </span>
+
+            </div>
+
+        </div>
+        <div *ngIf="transactions.length > 3" style="margin-top:20px;text-align:right">
+
+            <a href="javascript:void(0)" (click)="showAllTransactions()" style="font-weight:600;color:#2563eb">
+
+                View All Transactions →
+
+            </a>
+
+        </div>
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="card">
+
+        <h3>📦 Recent Orders</h3>
+
+        <div *ngIf="recentOrders.length === 0" class="empty-state">
+
+            <h4>No recent orders</h4>
+
+            <p>Start shopping to see your orders here.</p>
+
+        </div>
+
+        <div *ngFor="let order of recentOrders" class="transaction-card">
+
+            <div class="transaction-left">
+
+                <div class="transaction-icon credit-bg">
+                    📦
+                </div>
+
+                <div>
+
+                    <h4>Order #{{ order.id }}</h4>
+
+                    <small>
+
+                        {{ order.createdAt | date:'mediumDate' }}
+
+                    </small>
+
+                </div>
+
+            </div>
+
+            <div class="transaction-right">
+
+                <h3>
+
+                    ₹{{ order.totalAmount }}
+
+                </h3>
+
+                <span class="badge credit">
+
+                    {{ order.status }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <div style="margin-top:20px;text-align:right">
+
+            <a routerLink="/order" style="font-weight:600;color:#2563eb">
+
+                View All Orders →
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Logout -->
+    <div class="logout">
+
+        <button class="logout-btn">
+            Logout
+        </button>
+
+    </div>
+
+
+    <!-- Add Money Modal -->
+
+    <div class="modal-overlay" *ngIf="showAddMoneyModal">
+
+        <div class="modal">
+
+            <h2>💳 Add Money</h2>
+
+            <p>Enter amount to recharge your wallet</p>
+
+            <input type="number" [(ngModel)]="rechargeAmount" placeholder="Enter amount" />
+
+            <div class="modal-buttons">
+
+                <button class="cancel-btn" (click)="closeModal()">
+
+                    Cancel
+
+                </button>
+
+                <button class="continue-btn" (click)="continuePayment()">
+
+                    Continue
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+  class="modal-overlay"
+  *ngIf="showTransactionModal">
+
+  <div class="modal">
+
+    <h2>All Transactions</h2>
+
+    <div
+      *ngFor="let t of transactions"
+      class="transaction-card">
+
+      <div class="transaction-left">
+
+        <div
+          class="transaction-icon"
+          [ngClass]="{
+            'credit-bg': t.transactionType==='CREDIT',
+            'debit-bg': t.transactionType==='DEBIT'
+          }">
+
+          {{t.transactionType=='CREDIT' ? '⬇' : '⬆'}}
+
+        </div>
+
+        <div>
+
+          <h4>{{t.description}}</h4>
+
+          <small>{{t.createdAt | date:'medium'}}</small>
+
+        </div>
+
+      </div>
+
+      <div class="transaction-right">
+
+        <h3>
+
+          {{t.transactionType=='CREDIT'?'+':'-'}}₹{{t.amount}}
+
+        </h3>
+
+      </div>
+
+    </div>
+
+    <div
+      style="margin-top:20px;text-align:right">
+
+      <button
+        class="cancel-btn"
+        (click)="closeTransactionModal()">
+
+        Close
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+</div>

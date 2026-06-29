@@ -1,0 +1,41 @@
+<div class="dashboard-layout">
+
+  <app-admin-sidebar></app-admin-sidebar>
+
+  <div class="dashboard-content">
+
+    <h1 class="dashboard-title">
+      Admin Dashboard
+    </h1>
+
+    <div class="stats-grid">
+
+      <div class="stat-card revenue">
+        <h4>Total Revenue</h4>
+        <h2>₹ {{(totalRevenue / 100000).toFixed(1)}}L</h2>
+        <div class="icon">💰</div>
+      </div>
+
+      <div class="stat-card orders">
+        <h4>Total Orders</h4>
+        <h2>{{totalOrders}}</h2>
+        <div class="icon">📦</div>
+      </div>
+
+      <div class="stat-card products">
+        <h4>Total Products</h4>
+        <h2>{{totalProducts}}</h2>
+        <div class="icon">🛒</div>
+      </div>
+
+      <div class="stat-card users">
+        <h4>Total Users</h4>
+        <h2>{{totalUsers}}</h2>
+        <div class="icon">👥</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
